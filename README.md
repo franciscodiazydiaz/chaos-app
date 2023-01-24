@@ -6,11 +6,11 @@ Inspired by [GitLab chaos endpoints](https://gitlab.com/gitlab-org/gitlab/blob/m
 
 Currently, there are five endpoints for simulating the following conditions:
 
-* Slow requests.
-* CPU-bound requests.
-* Memory leaks.
-* Unexpected process crashes.
-* Disk IO
+* [Memory Leaks](#memory-leaks)
+* [CPU-bound Requests](#cpu-bound-requests)
+* [Slow Requests](#slow-requests)
+* [Unexpected Process Crash](#unexpected-process-crash)
+* [Disk IO](#disk-io)
 
 ## Getting Started
 
@@ -26,7 +26,7 @@ $ curl localhost:4567/frank-says
 
 ## Invoking chaos
 
-### Memory leaks
+### Memory Leaks
 
 To simulate a memory leak in your application, use the `/leak_mem` endpoint.
 
@@ -46,7 +46,7 @@ curl http://localhost:4567/leak_mem
 curl http://localhost:4567/leak_mem?memory_mb=1024&duration_s=10
 ```
 
-### CPU spin
+### CPU-bound Requests
 
 This endpoint attempts to fully utilise a single core, at 100%, for the given period.
 
@@ -67,7 +67,7 @@ curl http://localhost:4567/cpu_spin
 curl http://localhost:4567/cpu_spin?duration_s=60
 ```
 
-### Sleep
+### Slow Requests
 
 This endpoint is similar to the CPU Spin endpoint but simulates off-processor activity, such as network calls to backend services. It will sleep for a given duration_s.
 
@@ -86,7 +86,7 @@ GET /sleep?duration_s=50
 curl http://localhost:4567/sleep?duration_s=50
 ```
 
-### Kill
+### Unexpected Process Crash
 
 This endpoint will simulate the unexpected death of a worker process using a `kill` signal.
 
@@ -116,3 +116,7 @@ GET /disk_io
 ```shell
 curl http://localhost:4567/disk_io?fsize_mb=1&num_threads=512
 ```
+
+## License
+
+The code in this project is free software under the [MIT License](LICENSE).
